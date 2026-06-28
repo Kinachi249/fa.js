@@ -721,7 +721,7 @@ export class FurAffinityClient {
             return getSubmissionType(element);
           }) as any,
         },
-        title: "#submission_page div.submission-title p",
+        title: "#submission_page div.submission-title h2",
         thumb_url: pickImage("#submissionImg", "data-preview-src"),
         content_url: {
           selector: "#submission_page",
@@ -752,23 +752,23 @@ export class FurAffinityClient {
             return undefined;
           }) as any,
         },
-        artist_name: `#submission_page .submission-id-sub-container ${SELECTOR_USER} > span`,
+        artist_name: `#submission_page .c-usernameBlockSimple__displayName`,
         artist_url: pickLink(
-          `#submission_page .submission-id-container ${SELECTOR_USER}`
+          `#submission_page .c-usernameBlockSimple a`
         ),
         artist_thumb_url: pickImage(
-          `#submission_page .submission-id-avatar ${SELECTOR_USER} > img`
+          `#submission_page .submission-description-artist img.submission-user-icon`
         ),
-        body_text: "#submission_page div.submission-description",
+        body_text: "#submission_page div.submission-description-text",
         body_html: {
-          selector: "#submission_page div.submission-description",
+          selector: "#submission_page div.submission-description-text",
           how: "html",
         },
         when: this.pickWhenFromSpan(
-          "#submission_page .submission-id-container span.popup_date"
+          "#submission_page .submission-description-artist span.popup_date"
         ),
         keywords: {
-          listItem: `#submission_page div.submission-sidebar section.tags-row > span.tags a[href*="/search/"]`,
+          listItem: `#submission_page div#submission-sidebar-upper span.tags a[href*="/search/"]`,
           data: {
             value: "",
           },
@@ -782,7 +782,7 @@ export class FurAffinityClient {
           convert: (c: { value: string }) => c.value,
         },
         nav_items: {
-          listItem: `#submission_page section.minigallery-more div.preview-gallery ${SELECTOR_VIEW}`,
+          listItem: `#submission_page section.minigallery-container > div ${SELECTOR_VIEW}`,
           data: {
             value: {
               attr: "href",
